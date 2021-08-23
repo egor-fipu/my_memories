@@ -43,7 +43,7 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 #### Яндекс-карты
-1. Получите API-ключ для Яндекс-карт по адресу: https://developer.tech.yandex.ru/services/
+1. Получите API-ключ для Яндекс-карт по адресу: https://developer.tech.yandex.ru/keys/
 2. Вставьте <ваш API-ключ> на странице *templates/memory/new_memory.html*
 
 #### Вконтакте
