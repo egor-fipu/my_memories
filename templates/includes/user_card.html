@@ -1,0 +1,37 @@
+<!-- Шаблон карточки пользователя -->
+<div class="col-md-3 mb-3 mt-1">
+  <div class="card">
+    <div class="card-body">
+      <div class="h2">
+        <!-- Имя автора -->
+        {{ user.get_full_name }}
+      </div>
+    </div>
+    <img class="card-img"
+         src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
+         alt="Не удалось загрузить фотографию с сайта"/>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="h6 text-muted">
+          <!--Количество записей -->
+          Записей: {{ user.memory.count }}
+        </div>
+      <li class="list-group-item p-0 text-center">
+        <a
+            class="btn btn-info btn-sm btn-block"
+            href="{% url "new_memory" %}"
+            role="button">
+          Добавить воспоминание
+        </a>
+        <a
+            class="btn btn-danger btn-sm btn-block"
+            href="{% url 'account_logout' %}"
+            role="button">
+          Выйти
+        </a>
+      </li>
+      <li class="list-group-item p-0 text-center">
+      </li>
+    </ul>
+  </div>
+</div>

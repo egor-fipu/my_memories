@@ -1,0 +1,77 @@
+{% extends 'base.html' %} {% load socialaccount %}
+{% load static %}
+
+{% block content %}
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!--
+        Укажите свой API-ключ. Тестовый ключ НЕ БУДЕТ работать на других сайтах.
+        Получить ключ можно в Кабинете разработчика: https://developer.tech.yandex.ru/keys/
+    -->
+    <script
+        src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=<ваш API-ключ>"
+        type="text/javascript"></script>
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'event_properties.js' %}" id="MyLoads"
+            data-src="{% url 'get_coord' %}" type="text/javascript"></script>
+    <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+  </head>
+  <body class="row justify-content-center">
+  <div id="map" class="w-75 h-75 p-2"></div>
+  </body>
+  <div class="row justify-content-center">
+    <div class="col-md-8 p-5">
+      <div class="card">
+        <div class="card-header">Добавить воспоминание</div>
+        <div class="card-body">
+
+          {% for error in form.errors %}
+            <div class="alert alert-danger" role="alert">
+              {{ error }}
+            </div>
+          {% endfor %}
+          <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+              <div class="form-group row"
+                   aria-required={{ field.field.required }}>
+                <label
+                    for="{{ field.id_for_label }}"
+                    class="col-md-4 col-form-label text-md-right">
+                  {{ field.label }}
+                  {% if field.field.required %}
+                    <span class="required">*</span>
+                  {% endif %}
+                </label>
+                <div class="col-md-6">
+                  {{ field }}
+                  {% if field.help_text %}
+                    <small
+                        id="{{ field.id_for_label }}-help"
+                        class="form-text text-muted">
+                      {{ field.help_text|safe }}
+                    </small>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+            <div class="col-md-6 offset-md-4">
+              <button type="submit" class="btn btn-primary">
+                Сохранить
+              </button>
+            </div>
+          </form>
+        </div> <!-- card body -->
+      </div> <!-- card -->
+    </div> <!-- col -->
+  </div>
+{% endblock content %}

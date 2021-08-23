@@ -1,0 +1,15 @@
+<div class="card mb-3 mt-1 shadow-sm">
+  <div class="card-header">{{ memory.title }}</div>
+  <div class="card-body">
+    <p class="card-text">{{ memory.description|linebreaksbr }}</p>
+    <hr>
+    <!-- Координаты  -->
+    {% if memory.lat %}
+      <small
+          class="text-muted">Координаты: {{ memory.lat }}; {{ memory.lon }}</small>
+    {% else %}
+      <small
+          class="text-muted">Координаты не указаны</small>
+    {% endif %}
+  </div>
+</div>

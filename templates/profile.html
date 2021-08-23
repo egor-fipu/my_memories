@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% load socialaccount %}
+{% block title %}Профиль пользователя {{ user.username }}{% endblock %}
+{% block content %}
+
+  <main role="main" class="container">
+    <h1>Профиль пользователя {{ user.username }}</h1>
+    <div class="row">
+      <!-- Карточка автора -->
+      {% include 'includes/user_card.html' %}
+      <!-- Блок с воспоминаниями -->
+      <div class="col-md-9">
+        {% if page.paginator.count == 0 %}
+          <div class="container" style="text-align: center; padding-top: 10%;">
+            <h2>У Вас еще нет ни одного воспоминания</h2>
+          </div>
+        {% endif %}
+        {% for memory in page %}
+          {% include "includes/memory_card.html" with memory=memory %}
+        {% endfor %}
+        {% include "includes/paginator.html" %}
+      </div>
+    </div>
+  </main>
+{% endblock content %}
